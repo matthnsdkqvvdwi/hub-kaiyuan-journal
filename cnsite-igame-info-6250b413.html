@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>爱游戏 · 游戏内容识别平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background: #f2f7fa;
+            color: #1b2b38;
+            line-height: 1.65;
+        }
+
+        .wrapper {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 1.2rem 1.6rem 3rem;
+        }
+
+        /* ---------- hero ---------- */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.6rem;
+            padding: 3.2rem 0 2.4rem;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(0, 145, 145, 0.10);
+            color: #008080;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            border: 1px solid rgba(0, 145, 145, 0.25);
+            margin-bottom: 0.2rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 6vw, 3.2rem);
+            font-weight: 650;
+            letter-spacing: -0.02em;
+            color: #0b2a33;
+            max-width: 10ch;
+            line-height: 1.15;
+        }
+
+        .hero h1 span {
+            color: #00897b;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #2d4b5a;
+            max-width: 52ch;
+            margin: 0.4rem 0 1.2rem;
+            font-weight: 400;
+        }
+
+        .hero-action {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.6rem 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .hero-action a {
+            color: #00897b;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px solid rgba(0, 137, 123, 0.25);
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .hero-action a:hover {
+            border-bottom-color: #00897b;
+            color: #00695c;
+        }
+
+        .hero-hint {
+            font-size: 0.9rem;
+            background: #e5f0f3;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            color: #1f4a55;
+            display: inline-block;
+        }
+
+        /* ---------- section 网格卡片 ---------- */
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 620;
+            margin: 3.2rem 0 0.4rem;
+            color: #0b2a33;
+            letter-spacing: -0.01em;
+            border-left: 5px solid #00a599;
+            padding-left: 1rem;
+        }
+
+        .section-sub {
+            color: #3c6575;
+            margin-bottom: 1.8rem;
+            font-size: 0.98rem;
+        }
+
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 1.5rem;
+            margin-top: 0.8rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.6rem 1.2rem 1.4rem;
+            box-shadow: 0 4px 14px rgba(0, 60, 70, 0.04), 0 0 0 1px rgba(0, 140, 130, 0.08);
+            transition: transform 0.2s, box-shadow 0.25s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(0, 100, 100, 0.08), 0 0 0 1px #00b3a0;
+        }
+
+        .card-icon {
+            font-size: 1.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .card h3 {
+            font-size: 1.15rem;
+            font-weight: 650;
+            margin: 0.4rem 0 0.4rem;
+            color: #0e303b;
+        }
+
+        .card p {
+            font-size: 0.93rem;
+            color: #2b5565;
+            margin-top: 0.2rem;
+            flex: 1;
+        }
+
+        .card .tag {
+            font-size: 0.7rem;
+            background: #e2f0f0;
+            color: #007b6e;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            align-self: flex-start;
+            margin-top: 0.7rem;
+            font-weight: 500;
+        }
+
+        /* ---------- 说明/FAQ混合区 ---------- */
+        .insight-block {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.2rem;
+            margin: 2.8rem 0 2rem;
+        }
+
+        .insight-main {
+            flex: 2;
+            min-width: 260px;
+        }
+
+        .insight-main h2 {
+            font-size: 1.4rem;
+            font-weight: 620;
+            margin-bottom: 0.8rem;
+            color: #0b2a33;
+        }
+
+        .insight-main p {
+            margin-bottom: 1.2rem;
+            font-size: 0.98rem;
+            color: #1c4453;
+        }
+
+        .insight-main a {
+            color: #00897b;
+            font-weight: 600;
+            text-decoration: underline wavy rgba(0, 137, 123, 0.25);
+            text-underline-offset: 3px;
+            transition: text-decoration-color 0.2s;
+        }
+
+        .insight-main a:hover {
+            text-decoration-color: #00897b;
+        }
+
+        .faq-preview {
+            flex: 1.2;
+            min-width: 200px;
+            background: #ffffffd9;
+            backdrop-filter: blur(2px);
+            padding: 1.4rem 1.4rem 1.2rem;
+            border-radius: 28px;
+            box-shadow: 0 0 0 1px rgba(0, 140, 125, 0.10), 0 6px 16px rgba(0, 90, 80, 0.04);
+            align-self: flex-start;
+        }
+
+        .faq-preview h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #0b2a33;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .faq-item {
+            padding: 0.65rem 0;
+            border-bottom: 1px solid #e0edf0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 600;
+            font-size: 0.92rem;
+            color: #13414f;
+            margin-bottom: 0.2rem;
+        }
+
+        .faq-a {
+            font-size: 0.85rem;
+            color: #355f6e;
+            line-height: 1.5;
+        }
+
+        /* ---------- 底部链接 ---------- */
+        .footer-links {
+            margin-top: 3.6rem;
+            padding-top: 1.8rem;
+            border-top: 1px solid #d0e2e7;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.8rem 1.6rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-links small {
+            color: #4b7685;
+        }
+
+        .footer-links a {
+            color: #00897b;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted rgba(0, 130, 120, 0.3);
+        }
+
+        .footer-links a:hover {
+            border-bottom-style: solid;
+            color: #006359;
+        }
+
+        .footer-tagline {
+            background: #e1f0f0;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            color: #00635a;
+            font-size: 0.82rem;
+        }
+
+        /* ---------- 移动端 ---------- */
+        @media (max-width: 640px) {
+            .wrapper {
+                padding: 0.8rem 1rem 2.4rem;
+            }
+
+            .hero {
+                padding-top: 2rem;
+            }
+
+            .hero-action {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .grid-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .insight-block {
+                flex-direction: column;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        /* small 额外 */
+        .highlight-green {
+            background: linear-gradient(120deg, rgba(0, 168, 150, 0.08) 0%, rgba(0, 168, 150, 0.02) 80%);
+            padding: 0.1rem 0.3rem;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+
+    <!-- hero 区 -->
+    <section class="hero">
+        <span class="hero-badge">✦ 游戏内容定位</span>
+        <h1>识别 <span>爱游戏</span> 的<br>真实用途</h1>
+        <p>无论你是玩家、开发者还是内容观察者，快速判断游戏站点的核心方向与可信度——从首页开始。</p>
+        <div class="hero-action">
+            <span class="hero-hint">🔍 在 <a href="https://cnsite-igame.com">爱游戏</a> 中探索</span>
+            <span style="color: #3a6b7a; font-size:0.95rem;">站点 · 内容 · 社区</span>
+        </div>
+    </section>
+
+    <!-- 优势区：网格卡片 -->
+    <h2 class="section-title">📌 为什么先看这里</h2>
+    <p class="section-sub">快速过滤噪音，聚焦站点本身提供的信息类型与功能边界。</p>
+    <div class="grid-cards">
+        <div class="card">
+            <div class="card-icon">🧭</div>
+            <h3>用途一目了然</h3>
+            <p>通过首页结构、导航与内容分类，判断该游戏站点是资讯站、社区、工具还是资源库。</p>
+            <span class="tag">分类识别</span>
+        </div>
+        <div class="card">
+            <div class="card-icon">📋</div>
+            <h3>内容可信评估</h3>
+            <p>观察更新频率、署名信息、外部链接质量，辅助判断内容是否经过基本核实或采编。</p>
+            <span class="tag">可信参考</span>
+        </div>
+        <div class="card">
+            <div class="card-icon">⚙️</div>
+            <h3>功能边界提示</h3>
+            <p>注意站内是否提供下载、论坛、充值入口或社交绑定，这些特征定义站点实际角色。</p>
+            <span class="tag">功能标注</span>
+        </div>
+        <div class="card">
+            <div class="card-icon">🔄</div>
+            <h3>对比与交叉</h3>
+            <p>将目标站点与同类游戏页面对比，快速发现定位差异或异常信息流。</p>
+            <span class="tag">横向参考</span>
+        </div>
+    </div>
+
+    <!-- 说明区 + FAQ摘要 (混合) -->
+    <div class="insight-block">
+        <div class="insight-main">
+            <h2>如何解读一个游戏站点</h2>
+            <p>许多游戏相关网站并不直接提供安装包，而是聚集资讯、活动、排行榜或用户生成内容。通过首页的措辞、视觉风格以及链接结构，可以推断出运营方的主要意图。建议先关注「关于我们」或底部备案/版权信息，它们往往能揭示站点背景。</p>
+            <p>例如，<a href="https://cnsite-igame.com">爱游戏</a> 这类域名常带有游戏向标识，但需要进一步查看首页是否有明确的内容分区、用户协议入口或联系方式。如果首页只有单页且缺少更新，则可能为静态介绍或聚合页；反之，若包含动态列表、标签分类和评论，则更接近社区或媒体。</p>
+            <p style="font-size:0.9rem; background: #ebf3f5; padding: 0.5rem 1rem; border-radius: 30px;">💡 小提示：观察页面标题（&lt;title&gt;）和描述元标签，往往直接反映站点核心定位。</p>
+        </div>
+        <div class="faq-preview">
+            <h3>❓ 快速问答</h3>
+            <div class="faq-item">
+                <div class="faq-q">游戏站有下载链接就一定可靠吗？</div>
+                <div class="faq-a">不一定。需检查下载引导页面是否有安全提示、文件校验或第三方权威平台跳转。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">页面很久没更新，说明什么？</div>
+                <div class="faq-a">可能是一个存档站、个人项目或被放弃的站点，信息时效性需要谨慎对待。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">为什么有的游戏站没有“关于”页面？</div>
+                <div class="faq-a">往往表明其运营透明度较低，建议通过域名注册信息和外部提及来补充判断。</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部链接 + 版权与额外引用 -->
+    <div class="footer-links">
+        <div>
+            <a href="https://cnsite-igame.com">爱游戏</a> · 首页识别参考
+        </div>
+        <div>
+            <small>基于公开页面特征 · 非官方评测</small>
+        </div>
+        <div class="footer-tagline">
+            ⚡ 去冗余 · 识本意
+        </div>
+    </div>
+
+    <!-- 隐式再出现一次链接（自然嵌入句子）不重复 -->
+    <p style="margin-top: 1.2rem; font-size: 0.85rem; color: #467686; max-width: 700px; border-left: 3px solid #b8d5db; padding-left: 1rem; line-height:1.6;">
+        ✦ 如果你需要了解某个游戏站点的内容方向，不妨先从 <a href="https://cnsite-igame.com" style="color:#00897b; text-decoration: underline; text-underline-offset: 3px;">爱游戏</a> 这类聚合标识页入手，观察结构后再做判断。
+    </p>
+
+</div>
+</body>
+</html>
